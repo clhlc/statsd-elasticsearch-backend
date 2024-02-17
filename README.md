@@ -41,7 +41,8 @@ Add a structure to your configuration called "elasticsearch":
 	 timerType:     "timer",
 	 timerDataType: "timer_data",
 	 gaugeDataType: "gauge",
-     formatter:     "default_format"
+         onlyTimerAggregates: false, // whether to store each timer value (default) or only aggregates for the configured flush interval
+         formatter:     "default_format"
  }
 ```
 
@@ -65,6 +66,8 @@ Nginx config proxy example:
 The field _indexPrefix_ is used as the prefix for your dynamic indices: for example "statsd-2014.02.04"
 
 The field _indexTimestamp_ allows you to determine the timestamping for your dynamic index. "year", "month" and "day" would produce "statsd-2014", "statsd-2014.02", "statsd-2014.02.04" respectively.
+
+Using the boolean field _onlyTimerAggregates_ (default to `false`), you may configure to store only aggregates of a certain timer (one single document), instead of having one document per received timer value. This can be helpful in scenarios of high-frequent timers adding preasure to the ES backend. When accuracy of the configured flush interval is "fair enough", you can save a lot of inserts. Note this only works if there a aggregates for your timers created by StatsD at all (see [config.histogram](https://github.com/statsd/statsd/blob/master/docs/metric_types.md#timing)).
 
 NOTE: You can also set the configuratons using environment variables, eg. `ES_HOST`, `ES_PATH`, `ES_PORT`, `ES_INDEX_TIMESTAMP`, `ES_TIME_DATATYPE`
 
