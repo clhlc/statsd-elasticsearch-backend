@@ -14,9 +14,9 @@
       "name": "Ramesh Perumalsamy"
     }
   ],
-  "name": "statsd-elasticsearch7-backend",
+  "name": "statsd-elasticsearch-backend",
   "description": "A StatsD backend for Elasticsearch 7.x",
-  "version": "0.6.2",
+  "version": "0.0.1",
   "homepage": "https://github.com/lorenzoaiello/statsd-elasticsearch-backend",
   "repository": {
     "type": "git",
